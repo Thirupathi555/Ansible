@@ -1,0 +1,10 @@
+-name: cariables to print
+hosts: web
+vars:
+  COURSE: "Devops with aws "
+  DURATION: "120hours"
+  TRAINER: "Shiv"
+tasks:
+- name: print the information
+  ansible.builtin.debug:
+    msg: "Hi, {{COURSE}}, I am learning {{Devops }},with aws}},Devops with aws"
