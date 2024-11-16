@@ -1,0 +1,15 @@
+{
+    "name": "thirupathi",
+    "email": "thirupathisee339@gmail.com",
+    "addresses":
+    [
+        {
+            "type": "permanent",
+            "addressline": "hyderabad"
+        },
+        {
+            "type": "current",
+            "addressline": "bangalore"
+        }
+    ]
+}
