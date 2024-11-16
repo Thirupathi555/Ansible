@@ -1,0 +1,27 @@
+<Students>
+    <student>
+        <Name>pintu</Name>
+        <Email>thirupathisee339@gmail.com</Email>
+        <Addresses>
+            <Permanent>
+                <Addressline>Hyderabad</Addressline>
+            </Permanent>
+            <Current>
+                <Addressline>Hyderabad</Addressline>
+            </Current>
+        </Addresses>
+    </student>
+
+    <student>
+        <Name>Maha pintu</Name>
+        <Email>thirupathisee339@gmail.com</Email>
+        <Addresses>
+            <Permanent>
+                <Addressline>Hyderabad</Addressline>
+            </Permanent>
+            <Current>
+                <Addressline>Hyderabad</Addressline>
+            </Current>
+        </Addresses>
+    </student>
+</Students>
