@@ -1,0 +1,18 @@
+
+# YAML works on identation
+
+- Name: Thirupathi 
+  Email: thirupathisee3393@gmail.com
+  Addresses: 
+  - type: permanent 
+    addressline1: Hyderabad
+  - type: current 
+    addressline1: Bangalore
+
+- Name: thirupathi
+  Email: thirupathisee3393@gmail.com
+  Addresses: 
+  - type: permanent 
+    addressline1: Hyderabad
+  - type: current 
+    addressline1: Bangalore
