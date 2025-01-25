@@ -1,6 +1,25 @@
-- name: variables to print
-  hosts: web
+# - name: variables to print
+#   hosts: web
+#   tasks:
+#   - name: print the information
+#     ansible.builtin.debug:
+#       msg: "Hi, I am learning {{COURSE}}, Duration is: {{DURATION}}, Trainer: {{TRAINER}}"
+
+
+
+- name: variables from files 
+  hosts: web 
+  vars_prompt:
+  - name: COURSE
+    prompt: Enter the course name
+    private: false  # it means not confidential
+  - name: LEARNER
+    prompt: Enter the learner name
+    private: false  # it means not confidential
+  - name: DURATION 
+    prompt: Enter the duration of the course in hours
+    private: false  # it means not confidential
   tasks:
-  - name: print the information
-    ansible.builtin.debug:
-      msg: "Hi, I am learning {{COURSE}}, Duration is: {{DURATION}}, Trainer: {{TRAINER}}"
+   - name: print the course information 
+     ansible.builtin.debug:
+      msg: "Hi, my name is {{LEARNER}}, I am learning {{COURSE}} and it is {{DURATION}} a day"
