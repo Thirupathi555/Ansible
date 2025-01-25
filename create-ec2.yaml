@@ -9,7 +9,7 @@
     - mongodb
     - catalogue
     - web 
-    zone: daws81s.fun   # domain name 
+    zone: thirupathis.online   # domain name 
   tasks:
   - name: ansible to install boto3 and botocore
     ansible.builtin.pip:
@@ -37,7 +37,7 @@
     amazon.aws.route53:
       state: present 
       zone: "{{ zone }}"
-      record: "{{ item.item }}.{{ zone }}" #mysql.daws81s.fun, backend.daws81s.fun and frontend.daws81s.fun
+      record: "{{ item.item }}.{{ zone }}" #mysql.thirupathis.online, backend.thirupathis.online and frontend.thirupathis.online
       type: A 
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"  # mysql.private Ip 
@@ -50,10 +50,10 @@
     amazon.aws.route53:
       state: present 
       zone: "{{ zone }}"
-      record: "{{ zone }}" #daws81s.fun
+      record: "{{ zone }}" #thirupathis.online
       type: A 
       ttl: 1
-      value: "{{ item.instances[0].public_ip_address }}" # daws81s.fun. public Ip 
+      value: "{{ item.instances[0].public_ip_address }}" # thirupathis.online. public Ip 
       wait: true 
       overwrite: true 
     loop: "{{ ec2_instances.results }}"
