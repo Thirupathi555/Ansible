@@ -1,84 +1,84 @@
-- name: create ec2 and r53 records 
-  hosts: local 
-  connection: local 
-  vars: 
-    subnet_id: subnet-057a823df234beef9  # copy the subnet_id from the instances in the networking
-    sg_id: sg-0525227f8e227493c  # copy the security group id from the AWS security 
-    ami_id: ami-09c813fb71547fc4f   # copy the ami imag eid from the AWS details 
-    instances:
-    - mysql    # instances[0]
-    - backend  #[1]
-    - frontend  #[2]
-    zone: thirupathis.online   # domain name 
-  tasks:
-  - name: ansible to install boto3 and botocore
-    ansible.builtin.pip:
-      name:
-      - boto3 
-      - botocore
-      executable: pip3.9
-  - name: create ec2 instance 
-    amazon.aws.ec2_instance:
-      name: "{{ item }}"
-      vpc_subnet_id: "{{ subnet_id }}"
-      instance_type: "t3.micro"
-      security_group: "{{ sg_id }}"
-      image_id: "{{ ami_id }}"
-    loop: "{{ instances }}"
-    register: ec2_instances    # to catch the total information and output - registers
+# - name: create ec2 and r53 records 
+#   hosts: local 
+#   connection: local 
+#   vars: 
+#     subnet_id: subnet-08de09bd001e7f462  # copy the subnet_id from the instances in the networking
+#     sg_id: sg-003f142b4196b99ba  # copy the security group id from the AWS security 
+#     ami_id: ami-09c813fb71547fc4f   # copy the ami imag eid from the AWS details 
+#     instances:
+#     - mysql    # instances[0]
+#     - backend  #[1]
+#     - frontend  #[2]
+#     zone: thirupathis.online   # domain name 
+#   tasks:
+#   - name: ansible to install boto3 and botocore
+#     ansible.builtin.pip:
+#       name:
+#       - boto3 
+#       - botocore
+#       executable: pip3.9
+#   - name: create ec2 instance 
+#     amazon.aws.ec2_instance:
+#       name: "{{ item }}"
+#       vpc_subnet_id: "{{ subnet_id }}"
+#       instance_type: "t3.micro"
+#       security_group: "{{ sg_id }}"
+#       image_id: "{{ ami_id }}"
+#     loop: "{{ instances }}"
+#     register: ec2_instances    # to catch the total information and output - registers
 
 
-  - name: print the output 
-    ansible.builtin.debug:
-      msg: "{{ ec2_instances }}"
+#   - name: print the output 
+#     ansible.builtin.debug:
+#       msg: "{{ ec2_instances }}"
 
-  #private IP route53
-  - name: create r53 private records 
-    amazon.aws.route53:
-      state: present 
-      zone: "{{ zone }}"
-      record: "{{ item.item }}.{{ zone }}" #mysql.thirupathis.online, backend.thirupathis.online and frontend.thirupathis.online
-      type: A 
-      ttl: 1
-      value: "{{ item.instances[0].private_ip_address }}"  # mysql.private Ip 
-      wait: true 
-      overwrite: true 
-    loop: "{{ ec2_instances.results }}"
+#   #private IP route53
+#   - name: create r53 private records 
+#     amazon.aws.route53:
+#       state: present 
+#       zone: "{{ zone }}"
+#       record: "{{ item.item }}.{{ zone }}" #mysql.thirupathis.online, backend.thirupathis.online and frontend.thirupathis.online
+#       type: A 
+#       ttl: 1
+#       value: "{{ item.instances[0].private_ip_address }}"  # mysql.private Ip 
+#       wait: true 
+#       overwrite: true 
+#     loop: "{{ ec2_instances.results }}"
     
-    # public IP route53
-  - name: create r53 public record for frontend
-    amazon.aws.route53:
-      state: present 
-      zone: "{{ zone }}"
-      record: "{{ zone }}" #thirupathis.online
-      type: A 
-      ttl: 1
-      value: "{{ item.instances[0].public_ip_address }}" # thirupathis.online. public Ip 
-      wait: true 
-      overwrite: true 
-    loop: "{{ ec2_instances.results }}"
-    when: item.item == "frontend" 
+#     # public IP route53
+#   - name: create r53 public record for frontend
+#     amazon.aws.route53:
+#       state: present 
+#       zone: "{{ zone }}"
+#       record: "{{ zone }}" #thirupathis.online
+#       type: A 
+#       ttl: 1
+#       value: "{{ item.instances[0].public_ip_address }}" # thirupathis.online. public Ip 
+#       wait: true 
+#       overwrite: true 
+#     loop: "{{ ec2_instances.results }}"
+#     when: item.item == "frontend" 
     
 
 
-    # mysql --> private ip 
-    # backend --> private ip 
-    # frontend --> private ip --> internal connection 
-    # main domain --> public Ip of frontend 
+#     # mysql --> private ip 
+#     # backend --> private ip 
+#     # frontend --> private ip --> internal connection 
+#     # main domain --> public Ip of frontend 
 
 
     - name: create ec2 and r53 records 
   hosts: local 
   connection: local 
   vars: 
-    subnet_id:subnet-08de09bd001e7f462  # copy the subnet_id from the instances in the networking
+    subnet_id: subnet-08de09bd001e7f462  # copy the subnet_id from the instances in the networking
     sg_id: sg-003f142b4196b99ba  # copy the security group id from the AWS security 
   ami_id: ami-09c813fb71547fc4f   # copy the ami imag eid from the AWS details 
     instances:
     - mysql    # instances[0]
     - backend  #[1]
     - frontend  #[2]
-    zone: daws81s.fun   # domain name 
+    zone: thirupathis.online  # domain name 
   tasks:
   - name: ansible to install boto3 and botocore
     ansible.builtin.pip:
