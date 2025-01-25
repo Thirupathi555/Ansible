@@ -73,7 +73,7 @@
   vars: 
     subnet_id:subnet-08de09bd001e7f462  # copy the subnet_id from the instances in the networking
     sg_id: sg-003f142b4196b99ba  # copy the security group id from the AWS security 
-    ami_id: ami-09c813fb71547fc4f   # copy the ami imag eid from the AWS details 
+  ami_id: ami-09c813fb71547fc4f   # copy the ami imag eid from the AWS details 
     instances:
     - mysql    # instances[0]
     - backend  #[1]
