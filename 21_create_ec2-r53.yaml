@@ -148,7 +148,7 @@
     - mysql    # instances[0]
     - backend  #[1]
     - frontend  #[2]
-    zone: daws81s.fun   # domain name 
+    zone: thirupathis.online  # domain name 
   tasks:
   - name: ansible to install boto3 and botocore
     ansible.builtin.pip:
